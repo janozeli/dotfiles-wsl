@@ -1,0 +1,4 @@
+source $HOME/.zshrc_extend
+
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/scripts"
