@@ -61,7 +61,7 @@ eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDob
 alias szsh="source ~/.zshrc"
 alias cc="clear"
 alias ".."="cd .."
-alias ls="eza --header --long --icons --git"
+alias ls="eza --header --long --icons --git --total-size"
 alias cat="bat"
 alias zshrc="nvim $HOME/.zshrc"
 alias zshrce="nvim $HOME/.zshrc_extend"
