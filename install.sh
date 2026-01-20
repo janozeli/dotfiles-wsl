@@ -39,7 +39,7 @@ fi
 
 # Instalar todas as dependências
 print_info "Instalando dependências..."
-yay -S --noconfirm --needed stow zsh git fzf zoxide eza bat gh less wget curl unzip tldr oh-my-posh-bin asdf-vm
+yay -S --noconfirm --needed stow zsh git fzf zoxide eza bat gh less wget curl unzip tldr oh-my-posh-bin fd ripgrep opencode-bin
 print_success "Dependências instaladas com sucesso!"
 
 # Criar Pastas se não existirem

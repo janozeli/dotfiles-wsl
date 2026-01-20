@@ -1,70 +1,76 @@
-# Install zinit if it's not installed
+# ┌──────────────────────────────────────────────────┐
+# │ PATH                                             │
+# └──────────────────────────────────────────────────┘
+
+path+=$HOME/.scripts
+path+=$HOME/.local
+path+=$HOME/.local/bin
+
+source $HOME/.scripts/wsl_linux_path_first_unique.sh
+wsl_linux_path_first_unique
+
+# ┌──────────────────────────────────────────────────┐
+# │ HISTORY                                          │
+# └──────────────────────────────────────────────────┘
+
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups
+
+# ┌──────────────────────────────────────────────────┐
+# │ ZINIT                                            │
+# └──────────────────────────────────────────────────┘
+
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-# Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-# Add in snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
 zinit snippet OMZP::command-not-found
 
-#asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
-
-# Load completions
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# History
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+# ┌──────────────────────────────────────────────────┐
+# │ COMPLETIONS                                      │
+# └──────────────────────────────────────────────────┘
 
-# Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Shell integrations
+# ┌──────────────────────────────────────────────────┐
+# │ INTEGRATIONS                                     │
+# └──────────────────────────────────────────────────┘
+
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-# ohmyposh
 eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/emodipt-extend.omp.json')"
-
-# Scripts
-source $HOME/.scripts/oc.sh
-source $HOME/.scripts/wsl_linux_path_first_unique.sh
-
-# direnv hook
 eval "$(direnv hook zsh)"
 
-# alias
+source $HOME/.scripts/oc.sh
+
+# ┌──────────────────────────────────────────────────┐
+# │ ALIASES                                          │
+# └──────────────────────────────────────────────────┘
+
 alias szsh="source ~/.zshrc"
 alias cc="clear"
 alias ".."="cd .."
@@ -72,11 +78,3 @@ alias ls="eza --header --long --icons --git"
 alias cat="bat"
 alias zshrc="nvim $HOME/.zshrc"
 alias zshrce="nvim $HOME/.zshrc_extend"
-
-#path
-path+=$HOME/.scripts
-path+=$HOME/.local
-path+=$HOME/.local/bin
-
-# WSL: paths Linux antes dos paths Windows + sem duplicatas
-wsl_linux_path_first_unique
