@@ -57,6 +57,13 @@ eval "$(zoxide init --cmd cd zsh)"
 # ohmyposh
 eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/emodipt-extend.omp.json')"
 
+# Scripts
+source $HOME/.scripts/oc.sh
+source $HOME/.scripts/wsl_linux_path_first_unique.sh
+
+# direnv hook
+eval "$(direnv hook zsh)"
+
 # alias
 alias szsh="source ~/.zshrc"
 alias cc="clear"

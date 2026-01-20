@@ -1,8 +1,0 @@
-source $HOME/.zshrc_extend
-
-source $HOME/.scripts/oc.sh
-
-source $HOME/.scripts/wsl_linux_path_first_unique.sh
-
-# direnv hook
-eval "$(direnv hook zsh)"

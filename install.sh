@@ -47,6 +47,11 @@ print_info "Criando pastas..."
 mkdir -p $HOME/.local/bin
 mkdir -p $HOME/.config
 
+# Criar dot-zshrc se não existir
+if [ ! -f "dot-zshrc" ]; then
+    echo -e "source \$HOME/.zshrc_extend\n" > dot-zshrc
+fi
+
 # Aplicar symlinks com GNU Stow
 print_info "Aplicando symlinks com GNU Stow..."
 stow --dotfiles -t $HOME .
