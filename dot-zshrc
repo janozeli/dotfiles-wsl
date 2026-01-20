@@ -1,4 +1,8 @@
 source $HOME/.zshrc_extend
 
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/scripts"
+source $HOME/.scripts/oc.sh
+
+source $HOME/.scripts/wsl_linux_path_first_unique.sh
+
+# direnv hook
+eval "$(direnv hook zsh)"

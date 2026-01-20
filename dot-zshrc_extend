@@ -61,10 +61,15 @@ eval "$(oh-my-posh init zsh --config 'https://raw.githubusercontent.com/JanDeDob
 alias szsh="source ~/.zshrc"
 alias cc="clear"
 alias ".."="cd .."
-alias ls="eza --header --long --icons --git --total-size"
+alias ls="eza --header --long --icons --git"
 alias cat="bat"
 alias zshrc="nvim $HOME/.zshrc"
 alias zshrce="nvim $HOME/.zshrc_extend"
 
 #path
-export PATH="$PATH:$HOME/.scripts"
+path+=$HOME/.scripts
+path+=$HOME/.local
+path+=$HOME/.local/bin
+
+# WSL: paths Linux antes dos paths Windows + sem duplicatas
+wsl_linux_path_first_unique
